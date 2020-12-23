@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'plugins/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <title>Doc / Budy</title>
+    <style>
+        body{
+            background-image: url("{% static 'images/2.jpg' %}");
+            background-position: center;
+            height: 100vh;
+            margin: 0;
+            color: white;
+        }
+        a , a:hover{
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        {% if user.is_authenticated %}
+        <b><a href="{% url 'logout' %}" style="position: absolute;top:20px;right: 30px;font-size: 18px;">Logout</a></b>
+        {% else %}
+        <b><a href="{% url 'login' %}" style="position: absolute;top:20px;right: 30px;font-size: 18px;">Login</a></b>
+        {% endif %}
+        <h1 style="font-size: 128px;text-align: center; padding-top: 200px;">DOC / BUDY.</h1>
+    </div>  
+</body>
+</html>

@@ -1,0 +1,28 @@
+{% extends 'doc_budy/base.html' %}
+{% load static %}
+{% block content %}
+<a href="{% url 'rv' %}"><i class="mdi mdi-arrow-left-bold btn btn-primary"></i></a><br><br>
+<div id="certificat">
+<div class="row">
+    <div class="col-6">
+        <p>Nom : {{rv.patient.nom_complet}}</p>
+    </div>
+    <div class="col-6">
+        <p>CIN : {{rv.patient.cin}}</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-6">
+        <p>Date : {{rv.dte_rv}}</p>
+    </div>
+    <div class="col-6">
+        <p>Heure : {{rv.heure_rv|time:"H:i"}}</p> 
+    </div>
+</div>
+</div>
+<br>
+<a class="btn btn-primary" href="{% url 'edit rv' pk=rv.pk %}"><i class="mdi mdi-18px mdi-lead-pencil"></i></a>&nbsp;
+<a class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item ?');" href="{% url 'remove_rv' pk=rv.pk %}"><i class="mdi mdi-18px mdi-delete"></i></a>
+<br>
+
+{% endblock %}

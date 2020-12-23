@@ -1,0 +1,44 @@
+{% extends 'doc_budy/base.html' %}
+{% block content %}
+
+<a href="{% url 'patient' %}"><i class="mdi mdi-arrow-left-bold btn btn-primary"></i></a><br><br>
+<form action="" method="POST">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-5">
+            <label for="">CIN :</label>
+            {{form.cin}}
+        </div>
+        <div class="col-5">
+            <label for="">Nom :</label>
+            {{form.nom_complet}}
+        </div>
+        <div class="col-2">
+            <label for="">Sexe :</label>
+            {{form.sexe}}
+        </div>
+    </div><br>
+    <div class="row">
+        <div class="col-6">
+            <label for="">Adresse :</label>
+            {{form.adresse}}
+        </div>
+        <div class="col-6">
+            <label for="">Telephone :</label>
+            {{form.tel}}
+        </div>
+    </div><br>
+    <div class="row">
+        <div class="col-6">
+            <label for="">Adresse Mail :</label>
+            {{form.mail}}
+        </div>
+        <div class="col-6">
+            <label for="">Date Naissance :</label>
+            {{form.dte_naissance}}
+        </div>
+    </div><br>
+
+    <input type="submit" value="Sauvgarder" class="btn btn-primary">
+</form>
+{% endblock %}

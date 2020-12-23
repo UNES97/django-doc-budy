@@ -1,0 +1,43 @@
+{% extends 'doc_budy/base.html' %}
+{% load static %}
+{% block content %}
+<a href="{% url 'ordonance' %}"><i class="mdi mdi-arrow-left-bold btn btn-primary"></i></a><br><br>
+<div id="ordonance">
+<div class="row">
+    <div class="col-6">
+        <p>Nom : {{ordonance.patient.nom_complet}}</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-6">
+        <p>Date : {{ordonance.dte_ord}}</p>
+    </div>
+    <div class="col-6">
+        <p>Heure : {{ordonance.heure_ord|time:"H:i"}}</p> 
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <p>Prescription : {{ordonance.prescription|linebreaks}}</p>
+    </div>
+</div>
+</div>
+<br>
+<button class="btn btn-success" value="Imprimer" onclick="printDiv()"><i class="mdi mdi-18px mdi-printer"></i></button>&nbsp;
+<a class="btn btn-primary" href="{% url 'edit ordonance' pk=ordonance.pk %}"><i class="mdi mdi-18px mdi-lead-pencil"></i></a>&nbsp;
+<a class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item ?');" href="{% url 'remove_ordonance' pk=ordonance.pk %}"><i class="mdi mdi-18px mdi-delete"></i></a>
+<br>
+<script> 
+    function printDiv() { 
+        var divContents = document.getElementById("ordonance").innerHTML; 
+        var a = window.open('', '', 'height=600, width=500'); 
+        a.document.write('<html>'); 
+        a.document.write("<link href='{% static 'plugins/bootstrap/css/bootstrap.min.css' %}' rel='stylesheet'>"); 
+        a.document.write('<body style="padding:70px 0px 0px 40px;font-size:28px;" ><h3 style="text-align:center;">DOC / BUDY </h3><h4 style="text-align:center;">Ordonance</h4><br>'); 
+        a.document.write(divContents); 
+        a.document.write('</body></html>'); 
+        a.document.close(); 
+        a.print(); 
+    } 
+</script> 
+{% endblock %}

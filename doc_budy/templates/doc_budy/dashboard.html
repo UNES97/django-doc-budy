@@ -1,0 +1,100 @@
+{% extends 'doc_budy/base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6 col-xl-4">
+        <div class="card mb-3 widget-content bg-midnight-bloom">
+            <div class="widget-content-wrapper text-white">
+                <div class="widget-content">
+                    <div class="widget-heading">{% now "D-d-M-Y" %}</div>
+                </div>
+                <div class="widget-content-right">
+                    <div class="widget-numbers text-white"><span>{% now "H:i" %}</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-xl-4">
+        <div class="card mb-3 widget-content bg-night-fade">
+            <div class="widget-content-wrapper text-white">
+                <div class="widget-content">
+                    <div class="widget-heading">Patients</div>
+                </div>
+                <div class="widget-content-right">
+                    <div class="widget-numbers text-white"><span>{{patients}}</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="card mb-3 widget-content bg-arielle-smile">
+            <div class="widget-content-wrapper text-white">
+                <div class="widget-content">
+                    <div class="widget-heading">Consultations</div>
+                </div>
+                <div class="widget-content-right">
+                    <div class="widget-numbers text-white"><span>{{consultation}}</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-4">
+        <div class="card mb-3 widget-content bg-premium-dark">
+            <div class="widget-content-wrapper text-white">
+                <div class="widget-content">
+                    <div class="widget-heading">Ordonances</div>
+                </div>
+                <div class="widget-content-right">
+                    <div class="widget-numbers text-warning"><span>{{ordonances}}</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="card mb-3 widget-content  bg-happy-green">
+            <div class="widget-content-wrapper text-white">
+                <div class="widget-content">
+                    <div class="widget-heading">Certificats</div>
+                </div>
+                <div class="widget-content-right">
+                    <div class="widget-numbers text-dark"><span>{{certificats}}</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><br>
+<div class="row">
+<div class="col-md-6">
+    <div class="main-card mb-3 card bg-arielle-smile">
+        <div class="card-body"><h5 class="card-title">Les Rvs d'Aujourd'hui : </h5>
+            <ul class="list-group">
+                {% for rv in rvs %}
+                {% if rv.patient.sexe == 'M' %}
+                <li class="list-group-item">Mr {{rv.patient}} : {{rv.dte_rv}} | {{rv.heure_rv|time:"H:i"}}</li>
+                {% else %}
+                <li class="list-group-item">Mme {{rv.patient}} : {{rv.dte_rv}} | {{rv.heure_rv|time:"H:i"}}</li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="col-md-6">
+    <div class="main-card mb-3 card bg-happy-green">
+        <div class="card-body"><h5 class="card-title">Les Rvs du demain : </h5>
+            <ul class="list-group">
+                {% for rv in rvs_tomo %}
+                {% if rv.patient.sexe == 'M' %}
+                <li class="list-group-item">Mr {{rv.patient}} : {{rv.dte_rv}} | {{rv.heure_rv|time:"H:i"}}</li>
+                {% else %}
+                <li class="list-group-item">Mme {{rv.patient}} : {{rv.dte_rv}} | {{rv.heure_rv|time:"H:i"}}</li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}

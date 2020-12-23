@@ -1,0 +1,131 @@
+{% extends 'doc_budy/base.html' %}
+
+{% block content %}
+<a href="{% url 'patient' %}"><i class="mdi mdi-arrow-left-bold btn btn-primary"></i></a><br><br>
+<div class="row">
+    <div class="col-6">
+        <p>CIN : {{patient.cin}}</p>
+    </div>
+    <div class="col-6">
+        <p>Nom : {{patient.nom_complet}}</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-6">
+        <p>Sexe : {{patient.sexe}}</p>
+    </div>
+    <div class="col-6">
+        <p>Adresse : {{patient.adresse}}</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-6">
+        <p>Tel : {{patient.tel}}</p>
+    </div>
+    <div class="col-6">
+        <p>Mail : {{patient.mail}}</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-6">
+        <p>Date de Naissance : {{patient.dte_naissance}}</p>
+    </div>
+</div><br>
+<div class="col-md">
+    <div id="accordion" class="accordion-wrapper mb-3">
+        <div class="card ">
+            <div id="headingOne" class="card-header bg-arielle-smile">
+                <button type="button" data-toggle="collapse" data-target="#collapseOne1" aria-expanded="false" aria-controls="collapseOne" class="text-left m-0 p-0 btn btn-link btn-block collapsed">
+                    <h5 class="m-0 p-0">Les Consultations</h5>
+                </button>
+            </div>
+            <div data-parent="#accordion" id="collapseOne1" aria-labelledby="headingOne" class="collapse" >
+                <div class="card-body">
+                    <table class="table ">
+                        <thead class="thead-light">
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Details</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            {% for consultation in patient.consultations.all %}
+                          <tr>
+                            <td>{{consultation.pk}}</td>
+                            <td>{{consultation.patient}}</td>
+                            <td>{{consultation.dte_consultation}}</td>
+                            <td><a href="{% url 'consultation detail' pk=consultation.pk %}" class="btn btn-primary"><i class="mdi mdi-arrow-right-bold"></i></a></td>
+                          </tr>
+                          {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div id="headingTwo" class="b-radius-0 card-header bg-arielle-smile">
+                <button type="button" data-toggle="collapse" data-target="#collapseOne2" aria-expanded="false" aria-controls="collapseTwo" class="text-left m-0 p-0 btn btn-link btn-block collapsed"><h5 class="m-0 p-0">Les Ordonances</h5></button>
+            </div>
+            <div data-parent="#accordion" id="collapseOne2" class="collapse" >
+                <div class="card-body">
+                    <table class="table ">
+                        <thead class="thead-light">
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Details</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            {% for ordonance in patient.ordonances.all %}
+                          <tr>
+                            <td>{{ordonance.pk}}</td>
+                            <td>{{ordonance.patient}}</td>
+                            <td>{{ordonance.dte_ord}}</td>
+                            <td><a href="{% url 'ordonance detail' pk=ordonance.pk %}" class="btn btn-primary"><i class="mdi mdi-arrow-right-bold"></i></a></td>
+                          </tr>
+                          {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div id="headingThree" class="card-header bg-arielle-smile">
+                <button type="button" data-toggle="collapse" data-target="#collapseOne3" aria-expanded="false" aria-controls="collapseThree" class="text-left m-0 p-0 btn btn-link btn-block"><h5 class="m-0 p-0">Les Certificats</h5></button>
+            </div>
+            <div data-parent="#accordion" id="collapseOne3" class="collapse">
+                <div class="card-body">
+                    <table class="table ">
+                        <thead class="thead-light">
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Details</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            {% for certificat in patient.certificats.all %}
+                          <tr>
+                            <td>{{certificat.pk}}</td>
+                            <td>{{certificat.patient}}</td>
+                            <td>{{certificat.dte_certf}}</td>
+                            <td><a href="{% url 'certificat detail' pk=certificat.pk %}" class="btn btn-primary"><i class="mdi mdi-arrow-right-bold"></i></a></td>
+                          </tr>
+                          {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><br>
+<a class="btn btn-primary" href="{% url 'edit patient' pk=patient.pk %}"><i class="mdi mdi-18px mdi-lead-pencil"></i></a>&nbsp;
+<a class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item ?');" href="{% url 'remove_patient' pk=patient.pk %}"><i class="mdi mdi-18px mdi-delete"></i></a>
+
+<br>
+{% endblock %}

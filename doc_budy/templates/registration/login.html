@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'plugins/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <style>
+                        body {
+                        background-image: url("{% static 'images/2.jpg' %}");
+                        background-position: center;
+                        height: 100vh;
+                        margin: 0;
+                        
+                        }
+                        #login .container #login-row #login-column #login-box {
+                        margin-top: 60px;
+                        max-width: 600px;
+                        height: 320px;
+                        border: 1px solid #9C9C9C;
+                        background-color: #EAEAEA;
+                        }
+                        #login .container #login-row #login-column #login-box #login-form {
+                        padding: 20px;
+                        }
+                        #login .container #login-row #login-column #login-box #login-form #register-link {
+                        margin-top: -85px;
+                        }
+                        input[type=text] , input[type=password] {
+                            width: 100%;
+                            padding: 5px;
+                            border: 1px solid #ccc;
+                            border-radius: 4px;
+                            resize: vertical;
+                        }
+    </style>
+    <title>Login</title>
+</head>
+<body>
+    
+    <div id="login">
+        <img style="display: block;margin-left: auto;margin-right: auto;padding-top: 20px;" src="{% static 'images/logoo.png' %}" alt="Dashboard">
+        <div class="container">
+            <div id="login-row" class="row justify-content-center align-items-center">
+                <div id="login-column" class="col-md-6">
+                    <div id="login-box" class="col-md-12">
+                        <form id="login-form" class="form" action="{% url 'login' %}" method="POST">
+                            {% csrf_token %}
+                            <h3 class="text-center text-info">Connexion</h3>
+                            {% if form.errors %}
+                            <p>Your Username Or Password Isn't Correct</p>
+                            {% endif %}
+                            <div class="form-group">
+                                <label for="username" class="text-info">Username:</label><br>
+                                {{ form.username }}
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="text-info">Password:</label><br>
+                                {{ form.password }}
+                            </div> 
+                            <input type="submit" name="submit" class="btn btn-info btn-md" value="Connecter"> 
+                            <input type="hidden" name="next" value="{{ next }}">  
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

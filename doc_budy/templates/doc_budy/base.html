@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Doc / Budy</title>
+    <link href="{% static 'css/main.css' %}" rel="stylesheet">
+    <!-- Bootstrap Core CSS -->
+    <link href="{% static 'plugins/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <!-- You can change the theme colors from here -->
+    <link href="{% static 'css/colors/blue.css' %}" id="theme" rel="stylesheet">
+
+    <script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'plugins/jquery/jquery-ui.js' %}"></script>
+
+
+</head>
+
+<body style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;" class="fix-header fix-sidebar card-no-border">
+    <div class="preloader">
+        <svg class="circular" viewBox="25 25 50 50">
+            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> </svg>
+    </div>
+    <div id="main-wrapper">
+        <header class="topbar">
+            <nav class="navbar top-navbar navbar-toggleable-sm navbar-light">
+                <div  class="navbar-header">
+                    <a class="navbar-brand" href="">
+                       <img style="width: 60%; height: 40px;" src="{% static 'images/logoo.png' %}" alt="Dashboard">
+                </div>
+                <div class="navbar-collapse justify-content-end">
+                    <ul class="navbar-nav my-lg-0">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link  text-muted waves-effect waves-dark" aria-haspopup="true" aria-expanded="false">Bonjour {{  user.username|title }}</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <aside class="left-sidebar">
+            <div class="scroll-sidebar">
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav">
+                        <li> <a class="waves-effect waves-dark" href="{% url 'tableau du bord' %}" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Dashboard</span></a>
+                        </li>
+                        <li> <a class="waves-effect waves-dark" href="{% url 'patient' %}" aria-expanded="false"><i class="mdi mdi-human-male-female"></i><span class="hide-menu">Patients</span></a>
+                        </li>
+                        <li> <a class="waves-effect waves-dark" href="{% url 'consultation' %}" aria-expanded="false"><i class="mdi mdi-medical-bag"></i><span class="hide-menu">Consultations</span></a>
+                        </li>
+                        <li> <a class="waves-effect waves-dark" href="{% url 'ordonance' %}" aria-expanded="false"><i class="mdi mdi-file-document"></i><span class="hide-menu">Ordonances</span></a>
+                        </li>
+                        <li> <a class="waves-effect waves-dark" href="{% url 'certificat' %}" aria-expanded="false"><i class="mdi mdi-file-document"></i><span class="hide-menu">Certificats</span></a>
+                        </li>
+                        <li> <a class="waves-effect waves-dark" href="{% url 'rv' %}" aria-expanded="false"><i class="mdi mdi-calendar"></i><span class="hide-menu">Rvs</span></a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="sidebar-footer">
+               <a href="{% url 'logout' %}" class="link" data-toggle="tooltip" title="Logout"><i class="mdi mdi-power"></i></a> </div>
+        </aside>
+        <div class="page-wrapper">
+            <div class="container-fluid">
+                <div class="row page-titles">
+                    <div class="col-md-5 col-8 align-self-center">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{% url 'tableau du bord' %}">Acceuil</a></li>
+                            <li class="breadcrumb-item active">{{ request.resolver_match.url_name|title  }}</li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-block">
+                                {% block content %}
+                                
+                                {% endblock %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="footer">
+                © 2020 Doc / Budy 
+            </footer>
+        </div>
+    </div>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="{% static 'plugins/bootstrap/js/tether.min.js' %}"></script>
+    <script src="{% static 'plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="{% static 'js/jquery.slimscroll.js' %}"></script>
+    <!--Wave Effects -->
+    <script src="{% static 'js/waves.js' %}"></script>
+    <!--Menu sidebar -->
+    <script src="{% static 'js/sidebarmenu.js' %}"></script>
+    <!--stickey kit -->
+    <script src="{% static 'plugins/sticky-kit-master/dist/sticky-kit.min.js' %}"></script>
+    <!--Custom JavaScript -->
+    <script src="{% static 'js/custom.min.js' %}"></script>
+</body>
+
+</html>

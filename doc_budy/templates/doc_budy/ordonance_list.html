@@ -1,0 +1,53 @@
+{% extends 'doc_budy/base.html' %}
+
+{% block content %}
+
+<a href="{% url 'new ordonance' %}" class="btn btn-primary">Ajouter une Ordonance</a><hr>
+<form class="col-4" action="{% url 'ordonance' %}" method="get">
+  <div class="input-group">
+    <input style="height: auto;" type="text" class="form-control" name="q" placeholder="Rechercher ..."> <span class="input-group-btn">
+        <button type="submit" class="btn btn-primary">
+            <span class="mdi mdi-24px mdi-account-search"></span>
+        </button>
+    </span>
+  </div>
+</form><br>
+<table class="table">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nom</th>
+        <th scope="col">Date</th>
+        <th scope="col">Details</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for ord in object_list %}
+      <tr>
+        <td>{{ord.pk}}</td>
+        <td>{{ord.patient}}</td>
+        <td>{{ord.dte_ord}}</td>
+        <td><a href="{% url 'ordonance detail' pk=ord.pk %}" class="btn btn-primary"><i class="mdi mdi-arrow-right-bold"></i></a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+</table><br>
+<div class="pagination">
+  <span class="step-links">
+      {% if page_obj.has_previous %}
+          <a href="?page=1">&laquo; Premiere</a>
+          <a href="?page={{ page_obj.previous_page_number }}">Précédente</a>
+      {% endif %}
+
+      <span class="current">
+          Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+      </span>
+
+      {% if page_obj.has_next %}
+          <a href="?page={{ page_obj.next_page_number }}">Suivante</a>
+          <a href="?page={{ page_obj.paginator.num_pages }}">Dernière &raquo;</a>
+      {% endif %}
+  </span>
+</div>
+
+{% endblock %}

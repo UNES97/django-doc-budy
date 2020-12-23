@@ -1,0 +1,38 @@
+{% extends 'doc_budy/base.html' %}
+
+{% block content %}
+<a href="{% url 'consultation' %}"><i class="mdi mdi-arrow-left-bold btn btn-primary"></i></a><br><br>
+<div class="row">
+    <div class="col-6">
+        <p>Nom : {{consulation.patient.nom_complet}}</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-6">
+        <p>Date : {{consulation.dte_consultation}}</p>
+    </div>
+    <div class="col-6">
+        <p>Heure : {{consulation.heure_consultation|time:"H:i"}}</p> 
+    </div>
+</div>
+<div class="row">
+    <div class="col-6">
+        <p>Type : {{consulation.type_consultation}}</p>
+    </div>
+    <div class="col-6">
+        <p>Prix : {{consulation.prix}}</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-6">
+        <p>Symptomes : {{consulation.symptome}}</p>
+    </div>
+    <div class="col-6">
+        <p>Observation : {{consulation.observation}}</p>
+    </div>
+</div><br>
+<a class="btn btn-primary" href="{% url 'edit consultation' pk=consulation.pk %}"><i class="mdi mdi-18px mdi-lead-pencil"></i></a>&nbsp;
+<a class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item ?');" href="{% url 'remove_consultation' pk=consulation.pk %}"><i class="mdi mdi-18px mdi-delete"></i></a>
+
+<br>
+{% endblock %}
